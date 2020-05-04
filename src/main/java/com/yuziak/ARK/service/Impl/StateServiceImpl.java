@@ -1,5 +1,6 @@
 package com.yuziak.ARK.service.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,15 @@ public class StateServiceImpl implements StateService {
 	@Override
 	public List<State> findByContainerId(Long id) {
 		List<State> result = (List<State>) stateRepo.findAll();
+		List<State> resStates = new ArrayList<State>();
 		for (State state : result) {
-			if (state.getContainer().getId() != id) {
-				result.remove(state);
+			if (state.getContainer() != null) {
+				if (state.getContainer().getId() == id) {
+					resStates.add(state);
+				}
 			}
 		}
-		return result;
+		return resStates;
 	}
 
 	@Override

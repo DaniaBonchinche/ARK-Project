@@ -39,13 +39,11 @@ public class Client {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonBackReference
-	@JsonManagedReference
 	private Set<Container> containers;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonBackReference
-	@JsonManagedReference
 	private Set<User> users = new LinkedHashSet<User>();
 
 	public Long getId() {

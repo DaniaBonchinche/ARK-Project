@@ -1,12 +1,9 @@
 package com.yuziak.ARK.rest;
 
-import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,11 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yuziak.ARK.dto.AuthenticationRequestDto;
 import com.yuziak.ARK.dto.JwtDto;
 import com.yuziak.ARK.entity.User;
-import com.yuziak.ARK.repository.UserRepo;
 import com.yuziak.ARK.security.jwt.JwtTokenProvider;
 import com.yuziak.ARK.service.UserService;
 
-import net.minidev.json.JSONObject;
 
 @RestController
 @RequestMapping(value = "/login")

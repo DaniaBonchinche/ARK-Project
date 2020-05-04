@@ -59,8 +59,8 @@ public class StateController {
 	}
 
 	@CrossOrigin(origins = { "http://localhost:3000", "http://109.86.204.249:3000" })
-	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<State>> getContainersByClientId(@PathVariable("id") Long containerid) {
+	@RequestMapping(value = "cont/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<State>> getStatesByContainer(@PathVariable("id") Long containerid) {
 		List<State> states = stateService.findByContainerId(containerid);
 		if (states == null) {
 			return new ResponseEntity<List<State>>(HttpStatus.NOT_FOUND);

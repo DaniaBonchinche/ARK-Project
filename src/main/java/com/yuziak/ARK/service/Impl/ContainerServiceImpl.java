@@ -1,5 +1,6 @@
 package com.yuziak.ARK.service.Impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,15 @@ public class ContainerServiceImpl implements ContainerService {
 	@Override
 	public List<Container> findByClientId(Long id) {
 		List<Container> result = (List<Container>) containerRepo.findAll();
+		List<Container> resContainer =  new LinkedList<Container>();
 		for (Container container : result) {
-			if (container.getClient().getId() != id) {
-				result.remove(container);
+			if (container.getClient() != null) {
+				if (container.getClient().getId() == id) {
+					resContainer.add(container);
+				}
 			}
 		}
-		return result;
+		return resContainer;
 	}
 
 	@Override

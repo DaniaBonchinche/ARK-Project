@@ -56,7 +56,7 @@ public class ContainerController {
 	}
 
 	@CrossOrigin(origins = { "http://localhost:3000", "http://109.86.204.249:3000" })
-	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "cl/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<Container>> getContainersByClientId(@PathVariable("id") Long clientid) {
 		List<Container> containers = containerService.findByClientId(clientid);
 		if (containers == null) {

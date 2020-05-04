@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private JwtTokenProvider jwtTokenProvider;
 
 	private static final String[] ADMIN_ENDPOINT = {"/api/**"};
-	private static final String[] LOGIN_ENDPOINT = {"/api/users"};
+	private static final String[] LOGIN_ENDPOINT = {"/login","/v2/api-docs","/api/users"};
 
 	@Bean
 	@Override
@@ -42,8 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers(HttpMethod.OPTIONS, "/login").permitAll()
 				.antMatchers(LOGIN_ENDPOINT).permitAll()
-				.antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN").anyRequest()
-				.authenticated()
+				.antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN").anyRequest().permitAll()
 				.and()
 				.apply(new JwtConfigurer(jwtTokenProvider));
 	}

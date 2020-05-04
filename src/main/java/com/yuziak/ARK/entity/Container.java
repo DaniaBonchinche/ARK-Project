@@ -34,7 +34,6 @@ public class Container {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "container", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonBackReference
-	@JsonManagedReference
 	private Set<State> states;
 	
 	@ManyToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)

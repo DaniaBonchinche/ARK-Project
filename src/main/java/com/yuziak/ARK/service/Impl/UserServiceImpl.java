@@ -74,12 +74,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findByClientId(Long id) {
 		List<User> result = (List<User>) userRepository.findAll();
+		List<User> resUsers = new ArrayList<User>();
 		for (User user : result) {
-			if (user.getClient().getId()!= id) {
-				result.remove(user);
+			if (user.getClient() != null) {
+				if (user.getClient().getId() == id) {
+					resUsers.add(user);
+				}
 			}
 		}
-		
-		return result;
+
+		return resUsers;
 	}
 }
