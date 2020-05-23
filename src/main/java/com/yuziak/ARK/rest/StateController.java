@@ -29,11 +29,10 @@ public class StateController {
 
 	@Autowired
 	StateService stateService;
-	
+
 	@Autowired
 	ContainerService containerService;
-	
-	
+
 	@CrossOrigin(origins = { "http://localhost:3000", "http://109.86.204.249:3000" })
 	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
 	public ResponseEntity<State> getState(@PathVariable("id") Long stateid) {
@@ -82,9 +81,16 @@ public class StateController {
 		State newState = new State();
 		newState.setFilling((Integer) json.get("filling"));
 		newState.setTemperature((Integer) json.get("temperature"));
-		newState.setTime(new Date());
-		newState.setContainer(containerService.findById((Long) json.get("containerid")));
+		if (json.get("time") == null) {
+			newState.setTime(new Date());
+		}
+		newState.setContainer(containerService.findById(toLong((Integer) json.get("containerid"))));
 		stateService.add(newState);
 		return new ResponseEntity<State>(newState, HttpStatus.OK);
+	}
+
+	public Long toLong(Integer x) {
+		Long longx = (long) 0 + x;
+		return longx;
 	}
 }

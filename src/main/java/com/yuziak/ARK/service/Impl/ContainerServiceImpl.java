@@ -58,6 +58,8 @@ public class ContainerServiceImpl implements ContainerService {
 		tmp.setAdress(container.getAdress());
 		tmp.setClient(container.getClient());
 		tmp.setStates(container.getStates());
+		tmp.setLatitude(container.getLatitude());
+		tmp.setLongitude(container.getLongitude());
 		containerRepo.save(tmp);
 	}
 

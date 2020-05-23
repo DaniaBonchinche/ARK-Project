@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private JwtTokenProvider jwtTokenProvider;
 
 	private static final String[] ADMIN_ENDPOINT = {"/api/**"};
-	private static final String[] LOGIN_ENDPOINT = {"/login","/v2/api-docs","/api/users"};
+	private static final String[] LOGIN_ENDPOINT = {"/login/**","/api/users/**","/api/containers/**"};
 
 	@Bean
 	@Override
@@ -36,15 +36,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic().disable().csrf().disable().sessionManagement()
+		http.httpBasic().disable()
+				.csrf().disable()
+				.cors().and()
+				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.authorizeRequests()
-				.antMatchers(HttpMethod.OPTIONS, "/login").permitAll()
+				.antMatchers(HttpMethod.OPTIONS, "/login/**").permitAll()
 				.antMatchers(LOGIN_ENDPOINT).permitAll()
 				.antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN").anyRequest().permitAll()
 				.and()
 				.apply(new JwtConfigurer(jwtTokenProvider));
+		
 	}
 
 	@Bean

@@ -46,8 +46,7 @@ public class User {
 					@JoinColumn(name = "role_id", referencedColumnName = "id") })
 	private List<Role> roles;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@ManyToOne()
 	@JsonBackReference
 	@JoinColumn(name = "client_id", unique = false, nullable = true, updatable = true)
 	private Client client;

@@ -50,7 +50,7 @@ public class ClientController {
 		}
 		return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
 	}
-	
+
 	@CrossOrigin(origins = { "http://localhost:3000", "http://109.86.204.249:3000" })
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Client> addClient(@RequestBody @Valid JSONObject json) {
@@ -61,18 +61,17 @@ public class ClientController {
 		clientService.add(newClient);
 		return new ResponseEntity<Client>(newClient, HttpStatus.OK);
 	}
-	
-	
+
 	@CrossOrigin(origins = { "http://localhost:3000", "http://109.86.204.249:3000" })
 	@RequestMapping(value = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Client> updateClient(@RequestBody @Valid JSONObject json) {
 		Client newClient = new Client();
-		newClient.setId((Long) json.get("id"));
+		newClient.setId(toLong((Integer) json.get("id")));
 		newClient.setName((String) json.get("name"));
 		newClient.setEmail((String) json.get("email"));
 		newClient.setPhoneNumber((String) json.get("phone"));
-		newClient.setContainers(clientService.findById((Long) json.get("id")).getContainers());
-		newClient.setUsers(clientService.findById((Long) json.get("id")).getUsers());
+		newClient.setContainers(clientService.findById(toLong((Integer) json.get("id"))).getContainers());
+		newClient.setUsers(clientService.findById(toLong((Integer) json.get("id"))).getUsers());
 		clientService.update(newClient);
 		return new ResponseEntity<Client>(newClient, HttpStatus.OK);
 	}
@@ -84,5 +83,11 @@ public class ClientController {
 		clientService.delete(clientid);
 		return new ResponseEntity<Client>(client, HttpStatus.OK);
 	}
+	
+	public Long toLong(Integer x) {
+		Long longx = (long) 0 + x;
+		return longx;
+	}
+	
 
 }

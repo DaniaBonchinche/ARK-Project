@@ -27,21 +27,25 @@ public class Container {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(name = "adress")
 	private String adress;
-	
+
+	@Column(name = "latitude", nullable = true)
+	private double latitude;
+
+	@Column(name = "longitude", nullable = true)
+	private double longitude;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "container", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonBackReference
 	private Set<State> states;
-	
-	@ManyToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+
+	@ManyToOne()
 	@JsonBackReference
-	@JoinColumn(name="client_id", unique = false, nullable = false, updatable = true)
+	@JoinColumn(name = "client_id", unique = false, nullable = false, updatable = true)
 	private Client client;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -74,5 +78,20 @@ public class Container {
 		this.client = client;
 	}
 
-	
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
 }

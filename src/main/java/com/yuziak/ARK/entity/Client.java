@@ -37,12 +37,10 @@ public class Client {
 	private String phoneNumber;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonBackReference
 	private Set<Container> containers;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonBackReference
 	private Set<User> users = new LinkedHashSet<User>();
 

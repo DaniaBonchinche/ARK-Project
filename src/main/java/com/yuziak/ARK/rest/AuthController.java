@@ -56,7 +56,7 @@ public class AuthController {
 			response.put("username", username);
 			response.put("token", token);
 			response.put("id", user.getId());
-
+			System.out.println("login");
 			return ResponseEntity.ok(response);
 		} catch (AuthenticationException e) {
 			throw new BadCredentialsException("Invalid username or password");
@@ -77,7 +77,6 @@ public class AuthController {
 			boolean res = jwtTokenProvider.verToken(Jwt.getToken());
 			Map<Object, Object> response = new HashMap<>();
 			response.put("flag", res);
-			
 			return ResponseEntity.ok(response);
 		} catch (AuthenticationException e) {
 			throw new BadCredentialsException("JWT token is expired or invalid");

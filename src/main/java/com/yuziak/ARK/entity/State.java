@@ -38,8 +38,7 @@ public class State {
 	@Column(name = "temperature")
 	private int temperature;
 	
-	@ManyToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@ManyToOne()
 	@JsonBackReference
 	@JoinColumn(name="container_id", unique = false, nullable = false, updatable = true)
 	private Container container;
